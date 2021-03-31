@@ -63,12 +63,33 @@ function validarDNI(dni) {
     alert("Input field lost focus.");
   }
 
+  function programarHora(){
+    setInterval(pideHora, 1000); //un segundo son 1000 milisegundos
+    //MUY IMPORTANTE poner pideHora no pideHora(); sino, no se actualiza
+    
+  }
+
+  function pideHora(){
+    //Funcion que da la hora ne formato Americano
+    fecha = new Date();
+
+    //transformo el formato a formato local
+    fecha = fecha.toLocaleString();
+    //fecha = fecha.toLocaleTimeString('es-ES');
+
+    //console.log(fecha.toLocaleTimeString('es-ES'));
+
+    //Lo setteo dentro del párrafo en el encabezado
+    document.getElementById("hora").textContent = fecha;
+    //document.getElementById("hora").innerHTML = fecha;
+  }
+
   function pgCargada(){
 
   }
 
 
   function limpiarCampos(){
-
+    //Resetea el formulario al recargarPagina
     document.getElementById("formulario").reset(); 
   }
