@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<meta charset="UTF-8" />
+
+
+<html>
+<header>
+    
+        <link rel="STYLESHEET" type="text/css" href="estilo.css">
+        <script src="javaScript.js"></script>
+		<title>Elaboración del Currículum Vitae</title>
+        <h1>Elaboración del Currículum Vitae</h1>
+</header>
+<body onload="limpiarCampos();pgCargada()">
+
+    <div>
+
+        <div id="MenuIzda">
+            <a href="#" class="boton">Ir_a Cabecera</a>
+            <a href="#" class="boton">Generar CV</a>
+        </div>
+
+        <div id="MenuDrcha">
+            
+            <form id="formulario">
+                <div class="fila">
+                    <div class="etiq">
+                        <label for="fname">Nombre:</label>
+                    </div>
+                    <div class="campo">
+                        <input type="text" id="fname">
+                    </div>
+                </div>
+
+                <div class="fila">
+                    <div class="etiq">
+                      <label for="lname">Apellidos:</label>
+                    </div>
+                    <div class="campo">
+                        <input type="text" id="lname">
+                    </div>
+                </div>
+
+        
+                <div class="fila">
+                    <div class="etiq">
+                        <label for="dni">DNI:</label>
+                    </div>
+                    <div class="campo">
+                        <input type="text" id="dni" onblur="validarDNI(dni.value)" oninput="resetColor()">
+                    </div> 
+                </div>
+
+                <div class="fila">
+                    <div class="etiq">
+                        <label for="sexo">Sexo:</label>
+                    </div>
+                    <div class="campo">
+                        <input type="radio" id="masc" value="masc">
+                        <label for="masc">Masculino</label><br>
+                        <input type="radio" id="fem" value="fem">
+                        <label for="fem">Femenino</label><br>
+                        <input type="radio" id="otro" value="otro">
+                        <label for="otro">Otro</label>
+                    </div> 
+                </div>
+
+
+                <div class="fila">
+                    <div class="etiq">
+                        <label for="info">Seleccione 0 o varias:</label>
+                    </div>
+                    <div class="campo">
+                        <input type="checkbox" id="Opcion1" value="Ingles">
+                        <label for="Opcion1"> Habla Inglés</label><br>
+                        <input type="checkbox" id="Opcion2" value="EInfr">
+                        <label for="Opcion2"> Estudios de informática</label><br>
+                        <input type="checkbox" id="Opcion3" value="ELab">
+                        <label for="Opcion3"> Experiencia Laboral</label>
+                    </div> 
+                </div>
+
+                
+                <div class="fila">
+                    <div class="etiq">
+                        <label for="FNac">Fecha de Nacimiento:</label>
+                    </div>
+                    <div class="campo">
+                        <input type="date" id="FNac" ><br><br>
+                    </div>
+                </div>
+
+                <div class="fila">
+                    <div class="etiq">
+                        <label for="correo">Correo Electrónico:</label>
+                    </div>
+                    <div class="campo">
+                        <input type="email" id="correo" ><br><br>
+                    </div>
+                </div>
+
+                <div class="fila">
+                    <div class="etiq">
+                        <label for="img">Seleccionar Imagen:</label>
+                    </div>
+                    <div class="campo">
+                        <input type="file" id="img" ><br><br>
+                    </div>
+                </div>
+
+                <div class="fila">
+                    <div class="etiq">
+                     
+                    </div>
+                    <div class="campo">
+                        <textarea id="resumen" placeholder="Escriba un resumen del currículum."></textarea><br><br>
+                    </div>
+                </div>
+
+
+            </form>   
+          </div>
+      </div>
+
+
+</body>
+</html>
