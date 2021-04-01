@@ -11,13 +11,13 @@
         <h1 id="cabecera">Elaboración del Currículum Vitae</h1>
         <h2 id="hora"></h2>
 </header>
-<body onload="limpiarCampos();pgCargada();programarHora()">
+<body onload="programarHora();confirmaAlmLoc();CargarCampos()">
 
     <div>
 
         <div id="MenuIzda">
             <a href="#" class="boton">Ir_a Cabecera</a>
-            <a href="#" class="boton">Generar CV</a>
+            <a href="#" class="boton" onclick="almacenarLocal();desplegarNVent()">Generar CV</a>
         </div>
 
         <div id="MenuDrcha">
@@ -56,12 +56,13 @@
                         <label for="sexo">Sexo:</label>
                     </div>
                     <div class="campo">
-                        <input type="radio" id="masc" value="masc">
-                        <label for="masc">Masculino</label><br>
-                        <input type="radio" id="fem" value="fem">
-                        <label for="fem">Femenino</label><br>
-                        <input type="radio" id="otro" value="otro">
-                        <label for="otro">Otro</label>
+                        <!--El atributo name es esencial para la exclusion de los radio-->
+                        <input type="radio" id="masc" value="masc" name="genero">
+                        <label for="masc" id="m">Masculino</label><br>
+                        <input type="radio" id="fem" value="fem" name="genero">
+                        <label for="fem" id="f">Femenino</label><br>
+                        <input type="radio" id="otro" value="otro" name="genero">
+                        <label for="otro" id="o">Otro</label><br>
                     </div> 
                 </div>
 
@@ -72,11 +73,11 @@
                     </div>
                     <div class="campo">
                         <input type="checkbox" id="Opcion1" value="Ingles">
-                        <label for="Opcion1"> Habla Inglés</label><br>
+                        <label for="et1" id="c1">Habla Inglés</label><br>
                         <input type="checkbox" id="Opcion2" value="EInfr">
-                        <label for="Opcion2"> Estudios de informática</label><br>
+                        <label for="et2" id="c2">Estudios de informática</label><br>
                         <input type="checkbox" id="Opcion3" value="ELab">
-                        <label for="Opcion3"> Experiencia Laboral</label>
+                        <label for="et3" id="c3">Experiencia Laboral</label><br>
                     </div> 
                 </div>
 
@@ -86,7 +87,7 @@
                         <label for="FNac">Fecha de Nacimiento:</label>
                     </div>
                     <div class="campo">
-                        <input type="date" id="FNac" ><br><br>
+                        <input type="date" id="FN" ><br><br>
                     </div>
                 </div>
 
@@ -95,7 +96,7 @@
                         <label for="correo">Correo Electrónico:</label>
                     </div>
                     <div class="campo">
-                        <input type="email" id="correo" ><br><br>
+                        <input type="email" id="ce" ><br><br>
                     </div>
                 </div>
 
@@ -104,7 +105,7 @@
                         <label for="img">Seleccionar Imagen:</label>
                     </div>
                     <div class="campo">
-                        <input type="file" id="img" ><br><br>
+                        <input type="file" id="imag" ><br><br>
                     </div>
                 </div>
 
