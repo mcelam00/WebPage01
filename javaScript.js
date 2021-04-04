@@ -135,12 +135,60 @@ function validarDNI(dni) {
   }
 
   function almacenarLocal(){
+    //COMPROBACION DE LA ENTRADA
+      if ((document.getElementById("fname").value == "") || (document.getElementById("lname").value == "") || (document.getElementById("FN").value == "") || (document.getElementById("imag").value == "")){
+        
+        alert("ERROR Por favor, Cerciorese de que todos los campos están completos\n(Solo el resumen y las casillas indicadas son opcionales)");
+        return;     
+
+      }else{
+
+
+        if (testigo == false){
+          
+          alert("ERROR Por favor, Introduzca un DNI válido");
+          return;
+
+        }else{
+              
+            email_re = /^.{1,64}@.{1,255}\..+$/; //64 caracteres para la parte de ususario y 255 para la del dominio
+            
+            if (email_re.test(document.getElementById("ce").value) == false){
+            
+              alert("ERROR La dirección de Correo Electrónico no es válida");
+              return;
+            }
+        }
+        
+        flag = false;
+
+        var radio = document.forms[0];
+        var i;
+        for (i = 0; i <radio.length; i++) {
+          if (radio[i].checked == true) { //con que alguno esté picado basta
+            flag = true
+          }
+        }
+
+        if(flag == false){
+          for (i = 0; i <radio.length; i++) {
+            if (radio[i].checked == false) {
+              alert("ERROR Por favor, Debe seleccionar su Sexo");
+              return;
+            }
+          }
+        }
+
+      
+      }
+
 
     //Tanto con permiso como sin él, salvo los campos en variables para poder mostrarlos en la nueva hoja
 
       nombre = document.getElementById("fname").value;
       apellidos = document.getElementById("lname").value;
-      docNacId = document.getElementById("dni").value;
+      nombreCompleto = nombre+" "+apellidos;
+      docNacId = document.getElementById("dni").value; 
   
       if(document.getElementById("masc").checked){
       //console.log(document.getElementById("m").innerHTML);
@@ -153,6 +201,8 @@ function validarDNI(dni) {
         sexo = document.getElementById("o").textContent;
       }
 
+      casillasMarcadas = "";
+
       if(document.getElementById("Opcion1").checked){
         chk1 = document.getElementById("c1").textContent;
       }
@@ -162,9 +212,11 @@ function validarDNI(dni) {
       if(document.getElementById("Opcion3").checked){
         chk3 = document.getElementById("c3").textContent;
       }
-       
+
+           
       FNacimiento = document.getElementById("FN").value;
-      e_mail = document.getElementById("ce").value;
+      e_mail = document.getElementById("ce").value; 
+      rutaImagen = document.getElementById("imag").value;
       resumen = document.getElementById("resumen").value;
 
 
@@ -194,24 +246,33 @@ function validarDNI(dni) {
 
     }
 
+    desplegarNVent(); //LLamo a la funcion que abrirá la nueva página
+
 
   }
 
   function desplegarNVent(){
-
+    w = window.open() //abro una nueva ventana
+    w.document.open();
+    paginaNueva = "<!DOCTYPE html><meta charset='UTF-8' /><html id='paginaNueva'><header><link rel='STYLESHEET' type='text/css' href='estilo.css'><title>Resumen del Currículum Vitae</title><h1 id='cabecera'>Resumen del Currículum Vitae</h1></header><body id='cuerpo'><table id=tablaFormulario><tr><th>Campo Del Formulario</th><th colspan='3'>Contenido</th></tr><tr><td>Nombre Completo</td><td colspan='3'>"+nombreCompleto+"</td></tr><tr><td>Número de Identificación Fiscal (NIF)</td><td colspan='3'>"+docNacId+"</td></tr><tr><td>Sexo</td><td colspan='3'>"+sexo+"</td></tr><tr><td>Otros (Casillas Verif. Seleccionadas)</td><td>"+chk1+"</td><td>"+chk2+"</td><td>"+chk3+"</td></tr><tr><td>Fecha de Nacimiento</td><td colspan='3'>"+FNacimiento+"</td></tr><tr><td>Correo Electrónico</td><td colspan='3'>"+e_mail+"</td></tr><tr><td>Resumen del Currículum</td><td colspan='3'>"+resumen+"</td></tr></table></body></html>";
+    w.document.write(paginaNueva);
+    w.document.close();
+    
   }
 
 
   /*VARIABLES GLOBALES*/
 
+var testigo;
 var confnAlmacenamiento;
-var nombre;
-var apellidos;
+var nombreCompleto;
 var docNacId;
 var sexo;
 var chk1;
 var chk2;
 var chk3;
+var casillasMarcadas;
 var FNacimiento;
 var e_mail;
+var rutaImagen;
 var resumen;

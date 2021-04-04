@@ -137,3 +137,36 @@ label {
   color: black;
   background-color: white;
 }
+
+#tablaFormulario{
+  width:80%;
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  padding: 15px;
+  margin: 5%;
+  
+}
+
+#tablaFormulario td, #tablaFormulario th {
+  padding: 12px
+}
+
+#tablaFormulario tr:nth-child(even){background-color: #f2f2f2;}
+
+#tablaFormulario tr:hover {background-color: #ddd;}
+
+#tablaFormulario th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #d68925;
+  color: white;
+}
+
+#cuerpo {   
+  margin-top: 2%;
+}
+#paginaNueva{
+  background-color: gainsboro;
+
+}
