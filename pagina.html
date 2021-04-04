@@ -105,8 +105,11 @@
                         <label for="img">Seleccionar Imagen:</label>
                     </div>
                     <div class="campo">
-                        <input type="file" id="imag" ><br><br>
+                        <input type="file" id="imag" multiple accept="image/*" onchange="handleFiles(this.files)"><br><br>
                     </div>
+                        
+                
+                   
                 </div>
 
                 <div class="fila">

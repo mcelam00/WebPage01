@@ -254,12 +254,69 @@ function validarDNI(dni) {
   function desplegarNVent(){
     w = window.open() //abro una nueva ventana
     w.document.open();
-    paginaNueva = "<!DOCTYPE html><meta charset='UTF-8' /><html id='paginaNueva'><header><link rel='STYLESHEET' type='text/css' href='estilo.css'><title>Resumen del Currículum Vitae</title><h1 id='cabecera'>Resumen del Currículum Vitae</h1></header><body id='cuerpo'><table id=tablaFormulario><tr><th>Campo Del Formulario</th><th colspan='3'>Contenido</th></tr><tr><td>Nombre Completo</td><td colspan='3'>"+nombreCompleto+"</td></tr><tr><td>Número de Identificación Fiscal (NIF)</td><td colspan='3'>"+docNacId+"</td></tr><tr><td>Sexo</td><td colspan='3'>"+sexo+"</td></tr><tr><td>Otros (Casillas Verif. Seleccionadas)</td><td>"+chk1+"</td><td>"+chk2+"</td><td>"+chk3+"</td></tr><tr><td>Fecha de Nacimiento</td><td colspan='3'>"+FNacimiento+"</td></tr><tr><td>Correo Electrónico</td><td colspan='3'>"+e_mail+"</td></tr><tr><td>Resumen del Currículum</td><td colspan='3'>"+resumen+"</td></tr></table></body></html>";
+    paginaNueva = "<!DOCTYPE html><meta charset='UTF-8' /><html id='paginaNueva'><header><link rel='STYLESHEET' type='text/css' href='estilo.css'><title>Resumen del Currículum Vitae</title><h1 id='cabecera'>Resumen del Currículum Vitae</h1></header><body id='cuerpo'><table id=tablaFormulario><tr><th>Campo Del Formulario</th><th colspan='3'>Contenido</th></tr><tr><td>Nombre Completo</td><td colspan='3'>"+nombreCompleto+"</td></tr><tr><td>Número de Identificación Fiscal (NIF)</td><td colspan='3'>"+docNacId+"</td></tr><tr><td>Sexo</td><td colspan='3'>"+sexo+"</td></tr><tr><td>Otros (Casillas Verif. Seleccionadas)</td><td>"+chk1+"</td><td>"+chk2+"</td><td>"+chk3+"</td></tr><tr><td>Fecha de Nacimiento</td><td colspan='3'>"+FNacimiento+"</td></tr><tr><td>Correo Electrónico</td><td colspan='3'>"+e_mail+"</td></tr><tr><td>Resumen del Currículum</td><td colspan='3'>"+resumen+"</td></tr></table><div id='imagen'></div></body></html>";
     w.document.write(paginaNueva);
     w.document.close();
+
+    mostrarImagen();
     
   }
+/*
+  function mostrarImagen(){
+    console.log("Estoy en el manejador")
 
+
+    var d = w.document.getElementById("imagen");
+    console.log(documentFiles.length)
+    if (documentFiles.length) { //longitud de la cantidad de archivos seleccionados, 1 porque solo seleccionamos una foto
+      var list = w.document.createElement("ul");
+      d.appendChild(list);
+
+
+      
+        var li = w.document.createElement("li");
+        list.appendChild(li);
+  
+        var img = w.document.createElement("img");
+        img.src = w.createBlobURL(documentFiles);
+        img.height = 60;
+        img.onload = function() {
+          w.revokeBlobURL(this.src);
+        }
+        li.appendChild(img);
+    
+  }
+*/
+  function mostrarImagen() {
+    var d = w.document.getElementById("imagen");
+    if (!documentFiles.length) {
+      d.innerHTML = "<p>¡No se han seleccionado archivos!</p>";
+    } else {
+      var list = w.document.createElement("ul");
+      d.appendChild(list);
+      for (var i=0; i < documentFiles.length; i++) {
+        var li = w.document.createElement("li");
+        list.appendChild(li);
+  
+        var img = w.document.createElement("img");
+        img.src = w.URL.createObjectURL(documentFiles[i]);;
+        img.height = 720;
+        img.onload = function() {
+          undefined.URL.revokeBlobURL(this.src);
+        }
+        li.appendChild(img);
+
+      }
+    }
+  }
+
+
+
+  function handleFiles(files){
+
+    documentFiles = files;
+    
+  }
 
   /*VARIABLES GLOBALES*/
 
@@ -276,3 +333,5 @@ var FNacimiento;
 var e_mail;
 var rutaImagen;
 var resumen;
+var w;
+var documentFiles;
