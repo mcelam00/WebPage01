@@ -41,7 +41,7 @@ function validarDNI(dni) {
 
     //veo el testigo para ver si ha pasado las comprobaciones
     console.log(testigo);
-    if(testigo == false){
+    if(!testigo){
       //se marca en rojo
       document.getElementById("dni").style.background= "#ff8989";
       document.getElementById("dni").style.color = "white";
@@ -93,7 +93,7 @@ function validarDNI(dni) {
     //En primer lugar se comprueba si se ha dado permiso de almacenamiento local
     //console.log("NO")
 
-    if(confnAlmacenamiento == true){
+    if(confnAlmacenamiento){
       //se mira si hay campos almacenados localmente
       //console.log("SI")
       document.getElementById("imag").value = ''; //reseteo por seguridad la selección de la imagen
@@ -108,6 +108,10 @@ function validarDNI(dni) {
         document.getElementById("fem").checked = true;
       }else if(localStorage.getItem("cv_sexo") == "Otro"){
         document.getElementById("otro").checked = true;
+      }else{
+        document.getElementById("masc").checked = false;
+        document.getElementById("fem").checked = false;
+        document.getElementById("otro").checked = false;
       }
 
       console.log(localStorage.getItem("cv_chk1"))
@@ -149,12 +153,16 @@ function validarDNI(dni) {
 
   function almacenarLocal(){
     //COMPROBACION DE LA ENTRADA
-      if ((document.getElementById("fname").value == "") || (document.getElementById("lname").value == "") || (document.getElementById("FN").value == "") || (document.getElementById("imag").value == "")){
+      if ((document.getElementById("fname").value == "") || (document.getElementById("lname").value == "") || (document.getElementById("FN").value == "")){
         
         alert("ERROR Por favor, Cerciorese de que todos los campos están completos\n(Solo el resumen y las casillas indicadas son opcionales)");
         return;     
 
       }else{
+
+        if(document.getElementById("imag").value == ""){
+          alert("ADVERTENCIA No ha indroducido una imágen, ¿seguro que desea continuar?");
+        }
 
 
         if (testigo == false){
@@ -179,7 +187,7 @@ function validarDNI(dni) {
         var i;
         for (i = 0; i <radio.length; i++) {
           if (radio[i].checked == true) { //con que alguno esté picado basta
-            flag = true
+            flag = true;
           }
         }
 
@@ -235,6 +243,7 @@ function validarDNI(dni) {
            
       FNacimiento = document.getElementById("FN").value;
       e_mail = document.getElementById("ce").value; 
+      rutaImagen = document.getElementById("imag").value;
       resumen = document.getElementById("resumen").value;
 
 
@@ -324,6 +333,7 @@ var chk2 = "";
 var chk3 = "";
 var FNacimiento;
 var e_mail;
+var rutaImagen;
 var resumen;
 var w;
 var documentFiles;
