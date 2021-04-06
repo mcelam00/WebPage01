@@ -170,3 +170,6 @@ label {
   background-color: gainsboro;
 
 }
+ul {
+  list-style-type: none;
+}

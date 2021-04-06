@@ -91,11 +91,12 @@ function validarDNI(dni) {
 
   function CargarCampos(){
     //En primer lugar se comprueba si se ha dado permiso de almacenamiento local
-    console.log("NO")
+    //console.log("NO")
 
     if(confnAlmacenamiento == true){
       //se mira si hay campos almacenados localmente
-      console.log("SI")
+      //console.log("SI")
+      document.getElementById("imag").value = ''; //reseteo por seguridad la selección de la imagen
       document.getElementById("fname").value = localStorage.getItem("cv_nombre");
       document.getElementById("lname").value = localStorage.getItem("cv_apellidos");
       document.getElementById("dni").value = localStorage.getItem("cv_dni");
@@ -109,16 +110,25 @@ function validarDNI(dni) {
         document.getElementById("otro").checked = true;
       }
 
+      console.log(localStorage.getItem("cv_chk1"))
 
       //Miro en el almacenamiento local que casillas estaban marcadas (las que tengan valor guardado) y las marco
-      if(localStorage.getItem("cv_chk1") != undefined){
+      if(localStorage.getItem("cv_chk1") != "" && localStorage.getItem("cv_chk1") != null){
         document.getElementById("Opcion1").checked = true;
+      }else{
+        document.getElementById("Opcion1").checked = false;
       }
-      if(localStorage.getItem("cv_chk2") != undefined){
+
+      if(localStorage.getItem("cv_chk2") != "" && localStorage.getItem("cv_chk2") != null){
         document.getElementById("Opcion2").checked = true;
+      }else{
+        document.getElementById("Opcion2").checked = false;
       }
-      if(localStorage.getItem("cv_chk3") != undefined){
+
+      if(localStorage.getItem("cv_chk3") != "" && localStorage.getItem("cv_chk3") != null){
         document.getElementById("Opcion3").checked = true;
+      }else{
+        document.getElementById("Opcion3").checked = false;
       }
 
       document.getElementById("FN").value = localStorage.getItem("cv_fechNacim");
@@ -128,7 +138,10 @@ function validarDNI(dni) {
     }else{
       //si no se dan, no tiene sentido que se mire para cargar nada, ni suyo ni de nadie anterior 
        //Resetea el formulario al recargarPagina
-       document.getElementById("formulario").reset(); 
+       document.getElementById("formulario").reset();
+       document.getElementById("Opcion3").checked = false;
+       document.getElementById("Opcion3").checked = false;
+       document.getElementById("Opcion3").checked = false;
        localStorage.clear(); //borro los posibles datos que haya
     }
    
@@ -201,22 +214,27 @@ function validarDNI(dni) {
         sexo = document.getElementById("o").textContent;
       }
 
-      casillasMarcadas = "";
-
       if(document.getElementById("Opcion1").checked){
         chk1 = document.getElementById("c1").textContent;
+      }else{
+        chk1 = "";
       }
+
       if(document.getElementById("Opcion2").checked){
         chk2 = document.getElementById("c2").textContent;
+      }else{
+        chk2 = "";
       }
+
       if(document.getElementById("Opcion3").checked){
         chk3 = document.getElementById("c3").textContent;
+      }else{
+        chk3 = "";
       }
 
            
       FNacimiento = document.getElementById("FN").value;
       e_mail = document.getElementById("ce").value; 
-      rutaImagen = document.getElementById("imag").value;
       resumen = document.getElementById("resumen").value;
 
 
@@ -230,19 +248,22 @@ function validarDNI(dni) {
       localStorage.setItem("cv_sexo", sexo);
       
       
-      if(chk1 != undefined){
+      //if(chk1 != ""){
         localStorage.setItem("cv_chk1", chk1);
-      }
-      if(chk2 != undefined){
+        console.log(chk1)
+      //}
+      //if(chk2 != ""){
         localStorage.setItem("cv_chk2", chk2);
-      }
-      if(chk3 != undefined){
+      //}
+      //if(chk3 != ""){
         localStorage.setItem("cv_chk3", chk3);
-      }
+      //}
 
       localStorage.setItem("cv_fechNacim", FNacimiento);
       localStorage.setItem("cv_correoE", e_mail);
       localStorage.setItem("cv_resumen", resumen);
+
+
 
     }
 
@@ -254,39 +275,14 @@ function validarDNI(dni) {
   function desplegarNVent(){
     w = window.open() //abro una nueva ventana
     w.document.open();
-    paginaNueva = "<!DOCTYPE html><meta charset='UTF-8' /><html id='paginaNueva'><header><link rel='STYLESHEET' type='text/css' href='estilo.css'><title>Resumen del Currículum Vitae</title><h1 id='cabecera'>Resumen del Currículum Vitae</h1></header><body id='cuerpo'><table id=tablaFormulario><tr><th>Campo Del Formulario</th><th colspan='3'>Contenido</th></tr><tr><td>Nombre Completo</td><td colspan='3'>"+nombreCompleto+"</td></tr><tr><td>Número de Identificación Fiscal (NIF)</td><td colspan='3'>"+docNacId+"</td></tr><tr><td>Sexo</td><td colspan='3'>"+sexo+"</td></tr><tr><td>Otros (Casillas Verif. Seleccionadas)</td><td>"+chk1+"</td><td>"+chk2+"</td><td>"+chk3+"</td></tr><tr><td>Fecha de Nacimiento</td><td colspan='3'>"+FNacimiento+"</td></tr><tr><td>Correo Electrónico</td><td colspan='3'>"+e_mail+"</td></tr><tr><td>Resumen del Currículum</td><td colspan='3'>"+resumen+"</td></tr></table><div id='imagen'></div></body></html>";
+    paginaNueva = "<!DOCTYPE html><meta charset='UTF-8'/><html id='paginaNueva'><header><link rel='STYLESHEET' type='text/css' href='estilo.css'><title>Resumen del Currículum Vitae</title><h1 id='cabecera'>Resumen del Currículum Vitae</h1></header><body id='cuerpo'><table id=tablaFormulario><tr><th>Campo Del Formulario</th><th colspan='3'>Contenido</th></tr><tr><td>Nombre Completo</td><td colspan='3'>"+nombreCompleto+"</td></tr><tr><td>Número de Identificación Fiscal (NIF)</td><td colspan='3'>"+docNacId+"</td></tr><tr><td>Sexo</td><td colspan='3'>"+sexo+"</td></tr><tr><td>Otros (Casillas Verif. Seleccionadas)</td><td>"+chk1+"</td><td>"+chk2+"</td><td>"+chk3+"</td></tr><tr><td>Fecha de Nacimiento</td><td colspan='3'>"+FNacimiento+"</td></tr><tr><td>Correo Electrónico</td><td colspan='3'>"+e_mail+"</td></tr><tr><td>Resumen del Currículum</td><td colspan='3'>"+resumen+"</td></tr><tr><td>Imágen/es Cargadas</td><td colspan='3'><div id='imagen'></div></td></tr></table></body></html>";
     w.document.write(paginaNueva);
     w.document.close();
 
     mostrarImagen();
     
   }
-/*
-  function mostrarImagen(){
-    console.log("Estoy en el manejador")
 
-
-    var d = w.document.getElementById("imagen");
-    console.log(documentFiles.length)
-    if (documentFiles.length) { //longitud de la cantidad de archivos seleccionados, 1 porque solo seleccionamos una foto
-      var list = w.document.createElement("ul");
-      d.appendChild(list);
-
-
-      
-        var li = w.document.createElement("li");
-        list.appendChild(li);
-  
-        var img = w.document.createElement("img");
-        img.src = w.createBlobURL(documentFiles);
-        img.height = 60;
-        img.onload = function() {
-          w.revokeBlobURL(this.src);
-        }
-        li.appendChild(img);
-    
-  }
-*/
   function mostrarImagen() {
     var d = w.document.getElementById("imagen");
     if (!documentFiles.length) {
@@ -300,10 +296,7 @@ function validarDNI(dni) {
   
         var img = w.document.createElement("img");
         img.src = w.URL.createObjectURL(documentFiles[i]);;
-        img.height = 720;
-        img.onload = function() {
-          undefined.URL.revokeBlobURL(this.src);
-        }
+        img.height = 240;
         li.appendChild(img);
 
       }
@@ -315,6 +308,7 @@ function validarDNI(dni) {
   function handleFiles(files){
 
     documentFiles = files;
+
     
   }
 
@@ -325,13 +319,11 @@ var confnAlmacenamiento;
 var nombreCompleto;
 var docNacId;
 var sexo;
-var chk1;
-var chk2;
-var chk3;
-var casillasMarcadas;
+var chk1 = "";
+var chk2 = "";
+var chk3 = "";
 var FNacimiento;
 var e_mail;
-var rutaImagen;
 var resumen;
 var w;
 var documentFiles;
